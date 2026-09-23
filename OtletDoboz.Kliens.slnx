@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/API/">
+    <Project Path="OtletDoboz.API/OtletDoboz.API.csproj" />
+  </Folder>
+  <Folder Name="/Kliens/">
+    <Project Path="OtletDoboz.Kliens/OtletDoboz.Kliens.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="OtletDoboz.Models/OtletDoboz.Models.csproj" />
+  </Folder>
+</Solution>
