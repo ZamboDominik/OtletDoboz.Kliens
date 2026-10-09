@@ -11,7 +11,7 @@ namespace OtletDoboz.API.Data
             categories.Add(new Category(2,"Program"));    
             categories.Add(new Category(3,"Ebéd"));
 
-            ideas.Add(new Idea(1,"Pizza","Legyen Pizza", categories[2],0,false,DateTime.Now));
+            ideas.Add(new Idea("Pizza","Legyen Pizza",2,0,false,DateTime.Now));
         }
         public static int IdeasLastId()
         {

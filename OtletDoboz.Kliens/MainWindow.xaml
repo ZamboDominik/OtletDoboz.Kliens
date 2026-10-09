@@ -9,9 +9,9 @@
         Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <!-- Make left column take most space and right column a fixed portion so the form (including radio buttons) is visible -->
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition>
+            </ColumnDefinition>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Stretch">
             <TextBox x:Name="tb_Title" Height="36" FontSize="24" VerticalAlignment="Top">Cím</TextBox>
@@ -26,7 +26,8 @@
         </StackPanel>
         
         <DockPanel Grid.Column="0" LastChildFill="True">
-        <ComboBox x:Name="cb_Kategoriak_Filter" DockPanel.Dock="Top" SelectionChanged="cb_Kategoriak_Filter_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="cb"></ComboBox>
+            <ComboBox x:Name="cb_Kategoriak_Filter" DockPanel.Dock="Top" SelectionChanged="cb_Kategoriak_Filter_SelectionChanged"></ComboBox>
             <ListBox x:Name="lb_Ideas">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

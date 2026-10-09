@@ -9,20 +9,21 @@ namespace OtletDoboz.API.Controllers
     [Route("api/[controller]")]
     public class IdeasController : Controller
     {
+        IdeaDBContext db;
         public IdeasController()
         {
-            
+            db = new IdeaDBContext();
         }
         [HttpGet]
         public IActionResult GetIdeas() 
         {
-            return Ok(MockDatabase.ideas.Where(e => !e.isPrivate));
+            return Ok(db.ideas.Where(e => !e.isPrivate));
         }
         [HttpGet("{id}")]
         public IActionResult GetIdea(int id) 
         {
 
-            Idea idea = MockDatabase.ideas.FirstOrDefault(i => i.Id == id);
+            Idea idea = db.ideas.FirstOrDefault(i => i.Id == id);
             if (idea == null) return BadRequest();
             if (idea.isPrivate) return Unauthorized();
             return Ok(idea);
@@ -30,8 +31,9 @@ namespace OtletDoboz.API.Controllers
         [HttpPost]
         public IActionResult PostNewIdea(CreateIdeaRequest request) 
         {
-            Idea newIdea = new Idea(MockDatabase.IdeasLastId(), request.Title, request.Description, MockDatabase.categories.FirstOrDefault(c => c.Id == request.CategoryId),isPrivate:request.isPrivate,votes:0,created:DateTime.Now);
-            MockDatabase.ideas.Add(newIdea);
+            Idea newIdea = new Idea(request.Title, request.Description,request.CategoryId,isPrivate:request.isPrivate,votes:0,created:DateTime.Now);
+            db.ideas.Add(newIdea);
+            db.SaveChanges();
             return Ok( new { message = "Sikeres kreáció" });
         }
 

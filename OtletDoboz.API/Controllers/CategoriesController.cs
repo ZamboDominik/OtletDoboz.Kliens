@@ -8,20 +8,26 @@ namespace OtletDoboz.API.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
+        public IdeaDBContext db;
         public CategoriesController()
         {
-            
+            db = new IdeaDBContext();
         }
         [HttpGet]
         public IActionResult GetCategories() 
         {
-            return Ok(MockDatabase.categories);
+            return Ok(db.categories);
         }
         [HttpPost]
         public IActionResult PostNewCategory(Category category) 
         {
-            if(!MockDatabase.categories.Contains(category)) MockDatabase.categories.Add(category);
-            if (MockDatabase.categories.Contains(category)) return Ok(new { message = "Hozzáadva vagy már volt." });
+           
+            if (!db.categories.Contains(category))
+            {
+                db.categories.Add(category);
+                db.SaveChanges();
+            }
+            if (db.categories.Contains(category)) return Ok(new { message = "Hozzáadva vagy már volt." });
             else return BadRequest();
         }
     }
